@@ -6,26 +6,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/favorite">
+                Favorite</a>
+        </nav>
+    </header>
     <main>
         <% dataArray.forEach(element=> { %>
-            <h3>
-                <%= element.character %>
-            </h3>
-            <p>
-                <%= element.quote %>
-            </p>
-            <img src="<%= element.image %> " alt="<%= element.character %> ">
+            <div>
+                <h3>
+                    <%= element.character %>
+                </h3>
+                <p>
+                    <%= element.quote %>
+                </p>
+                <img src="<%= element.image %> " alt="<%= element.character %> ">
 
-            <form action="/save" method="POST">
-                <input type="hidden" name="character" value="<%= element.character %>">
-                <input type="hidden" name="quote" value="<%= element.quote %>">
-                <input type="hidden" name="img" value="<%= element.image %>">
-                <input type="hidden" name="direction" value="<%= element.characterDirection %>">
-                <input type="submit">
-            </form>
+                <form action="/save" method="POST">
+                    <input type="hidden" name="character" value="<%= element.character %>">
+                    <input type="hidden" name="quote" value="<%= element.quote %>">
+                    <input type="hidden" name="img" value="<%= element.image %>">
+                    <input type="hidden" name="direction" value="<%= element.characterDirection %>">
+                    <input type="submit" value="Save">
+                </form>
+            </div>
             <% }) %>
 
     </main>

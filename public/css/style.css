@@ -1,0 +1,9 @@
+main div {
+  width: 25%;
+}
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

@@ -11,6 +11,7 @@
 <body>
     <main>
         <% dataArray.forEach(element=> { %>
+
             <h3>
                 <%= element.character %>
             </h3>
@@ -18,8 +19,8 @@
                 <%= element.quote %>
             </p>
             <img src="<%= element.image %> " alt="<%= element.character %> ">
+            <a href="/details/<%= element.id %> ">Character Details</a>
             <% }) %>
-                <a href="/details">Character Details</a>
     </main>
 </body>
 
