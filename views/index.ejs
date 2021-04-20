@@ -1,44 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+<%- include('../public/partials/head.ejs') %>
 
-<body>
-    <header>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/favorite">
-                Favorite</a>
-        </nav>
-    </header>
-    <main>
-        <% dataArray.forEach(element=> { %>
-            <div>
-                <h3>
-                    <%= element.character %>
-                </h3>
-                <p>
-                    <%= element.quote %>
-                </p>
-                <img src="<%= element.image %> " alt="<%= element.character %> ">
 
-                <form action="/save" method="POST">
-                    <input type="hidden" name="character" value="<%= element.character %>">
-                    <input type="hidden" name="quote" value="<%= element.quote %>">
-                    <input type="hidden" name="img" value="<%= element.image %>">
-                    <input type="hidden" name="direction" value="<%= element.characterDirection %>">
-                    <input type="submit" value="Save">
-                </form>
-            </div>
-            <% }) %>
+    <body>
+        <%- include('../public/partials/header.ejs') %>
 
-    </main>
-</body>
+            <main class="indexMain">
+                <% dataArray.forEach(element=> { %>
+                    <div id="div-img">
+                        <h3>
+                            <%= element.character %>
+                        </h3>
+                        <p>
+                            <%= element.quote %>
+                        </p>
+                        <img src="<%= element.image %> " alt="<%= element.character %> ">
+
+                        <form action="/save" method="POST">
+                            <input type="hidden" name="character" value="<%= element.character %>">
+                            <input type="hidden" name="quote" value="<%= element.quote %>">
+                            <input type="hidden" name="img" value="<%= element.image %>">
+                            <input type="hidden" name="direction" value="<%= element.characterDirection %>">
+                            <input type="submit" value="Save" id="saveBtn">
+                        </form>
+                    </div>
+                    <% }) %>
+
+            </main>
+    </body>
 
 </html>
