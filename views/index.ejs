@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+
+<body>
+    <main>
+        <% dataArray.forEach(element=> { %>
+            <h3>
+                <%= element.character %>
+            </h3>
+            <p>
+                <%= element.quote %>
+            </p>
+            <img src="<%= element.image %> " alt="<%= element.character %> ">
+
+            <form action="/save" method="POST">
+                <input type="hidden" name="character" value="<%= element.character %>">
+                <input type="hidden" name="quote" value="<%= element.quote %>">
+                <input type="hidden" name="img" value="<%= element.image %>">
+                <input type="hidden" name="direction" value="<%= element.characterDirection %>">
+                <input type="submit">
+            </form>
+            <% }) %>
+
+    </main>
+</body>
+
+</html>
