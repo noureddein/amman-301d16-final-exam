@@ -38,7 +38,7 @@ const client = new pg.Client(process.env.DATABASE_URL);
 app.get('/', homePage);
 app.post('/save', saveCharacters);
 app.get('/favorite', favCharacters);
-app.post('/details/:char_id', characterDetails);
+app.get('/details/:char_id', characterDetails);
 
 
 // callback functions
@@ -72,6 +72,13 @@ function favCharacters(req, res) {
 
 function characterDetails(req, res) {
   console.log(req.params.char_id)
+  const sql = 'SELECT * FROM book_wiki WHERE id=$1;'
+  // const sql = 'UPDATE book_wiki SET quote=$1 WHERE id =$2;'
+  const safeValues = [req.params.char_id];
+  client.query(sql, safeValues).then(result => {
+    res.render('details', { dataArray, result })
+  })
+
 }
 
 
