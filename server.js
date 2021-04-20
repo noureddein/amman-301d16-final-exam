@@ -18,6 +18,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
+app.use(express.static('./public'));
 
 
 // Specify a directory for static resources
@@ -37,6 +38,7 @@ const client = new pg.Client(process.env.DATABASE_URL);
 app.get('/', homePage);
 app.post('/save', saveCharacters);
 app.get('/favorite', favCharacters);
+app.post('/details/:char_id', characterDetails);
 
 
 // callback functions
@@ -66,6 +68,10 @@ function favCharacters(req, res) {
   client.query(sql).then(results => {
     res.render('fav', { dataArray: results.rows })
   })
+}
+
+function characterDetails(req, res) {
+  console.log(req.params.char_id)
 }
 
 
