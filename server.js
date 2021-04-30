@@ -38,7 +38,9 @@ const client = new pg.Client(process.env.DATABASE_URL);
 app.get('/', homePage);
 app.post('/save', saveCharacters);
 app.get('/favorite', favCharacters);
-app.post('/details/:char_id', characterDetails);
+app.get('/details/:char_id', characterDetails);
+app.put('/update/:char_id', updateDetails)
+app.delete('/delete/:char_id', deleteCharacter)
 
 
 // callback functions
@@ -70,8 +72,26 @@ function favCharacters(req, res) {
   })
 }
 
+function deleteCharacter(req, res) {
+  const sql = 'DELETE FROM book_wiki WHERE id=$1;';
+  const safeValues = [req.params.char_id];
+  client.query(sql, safeValues).then(res.redirect('/favorite'))
+}
+
 function characterDetails(req, res) {
-  console.log(req.params.char_id)
+  const sql = 'SELECT * FROM book_wiki WHERE id=$1;'
+  const safeValues = [req.params.char_id];
+  client.query(sql, safeValues).then(result => {
+    res.render('details', { data: result.rows[0] })
+  })
+
+}
+
+function updateDetails(req, res) {
+  const sql = 'UPDATE book_wiki SET quote=$1 WHERE id =$2;'
+  const safeValues = [req.body.quote, req.params.char_id];
+  client.query(sql, safeValues).then(res.redirect('/favorite'))
+
 }
 
 

@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favorite Characters</title>
-</head>
+<%- include('../public/partials/head.ejs') %>
 
-<body>
-    <main>
-        <% dataArray.forEach(element=> { %>
 
-            <h3>
-                <%= element.character %>
-            </h3>
-            <p>
-                <%= element.quote %>
-            </p>
-            <img src="<%= element.image %> " alt="<%= element.character %> ">
-            <a href="/details/<%= element.id %> ">Character Details</a>
-            <% }) %>
-    </main>
-</body>
+    <body>
+        <%- include('../public/partials/header.ejs') %>
+
+            <main>
+                <% dataArray.forEach(element=> { %>
+                    <% if (element.characterdirection==='Left' ) { %>
+                        <div class="leftDiv">
+                            <img src=" <%=element.image %> " alt="<%= element.character %> ">
+                            <h3>
+                                <%= element.character %>
+                            </h3>
+                            <p>
+                                <%= element.quote %>
+                            </p>
+                            <button><a href="/details/<%= element.id %> ">Character Details</a></button>
+                        </div>
+
+                        <% } else { %>
+
+                            <div class="rightDiv">
+                                <img src=" <%=element.image %> " alt="<%= element.character %> ">
+                                <h3>
+                                    <%= element.character %>
+                                </h3>
+                                <p>
+                                    <%= element.quote %>
+                                </p>
+                                <button><a href="/details/<%= element.id %> ">Character Details</a></button>
+                            </div>
+                            <% } %>
+                                <% }) %>
+
+            </main>
+    </body>
 
 </html>
